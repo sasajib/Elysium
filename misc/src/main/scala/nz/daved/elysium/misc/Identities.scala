@@ -1,12 +1,13 @@
 package nz.daved.elysium.misc
 
+import nz.daved.elysium.gen.macroAnnotation
+
 import scala.annotation.{StaticAnnotation, compileTimeOnly}
 import scala.meta._
 
-
-@compileTimeOnly("@identity not expanded")
-class identity extends StaticAnnotation {
-  inline def apply(defn: Any): Any = meta(defn)
+object Identities {
+  @macroAnnotation
+  def identity[A <: Tree](tree: A): A = tree
 }
 
 @compileTimeOnly("@copyDef not expanded")
